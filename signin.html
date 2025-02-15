@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Quest - Login</title>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        body {
+            background-image: url('https://images.pexels.com/photos/207666/pexels-photo-207666.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .auth-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1);
+        }
+
+        .game-logo {
+            width: 120px;
+            height: 120px;
+            background: #FFD93D;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .auth-container h1 {
+            color: #2C3E50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .auth-container p {
+            color: #666;
+            margin-bottom: 25px;
+            font-weight: 400;
+            font-size: 1.1em;
+        }
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .auth-container input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #E0E0E0;
+            border-radius: 12px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            background: #F8F9FA;
+            margin-bottom: 15px;
+        }
+        
+        .auth-container input:focus {
+            border-color: #4ECDC4;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(78, 205, 196, 0.1);
+        }
+        
+        .auth-container button {
+            width: 100%;
+            padding: 15px 30px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-weight: 600;
+        }
+        
+        #sign-in-btn {
+            background: linear-gradient(45deg, #4ECDC4, #45B7D1);
+            color: white;
+        }
+        
+        .secondary-btn {
+            background: linear-gradient(45deg, #FF9B9B, #FFD4B2) !important;
+            color: white !important;
+        }
+        
+        #reset-password-btn {
+            background: linear-gradient(45deg, #C7E9B0, #A8E6CF) !important;
+            color: #2C3E50 !important;
+        }
+
+        .auth-container button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(69, 183, 209, 0.3);
+        }
+        
+        #error-message {
+            background-color: #FFE5E5;
+            color: #FF6B6B;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="game-logo">🎲</div>
+        <h1>Number Quest</h1>
+        <p>Log in to continue your math adventure!</p>
+        <input type="email" id="email" placeholder="Enter your email" />
+        <input type="password" id="password" placeholder="Enter your password" />
+        <button id="sign-in-btn">Start Quest</button>
+        <button class="secondary-btn" id="signup-btn">Join the Adventure</button>
+        <button id="reset-password-btn">Forgot Password?</button>
+        <div id="error-message"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAPqBbtP-KqLLVt0NcuVIKBDDz7jJa6Bak",
+            authDomain: "ip-y2s2.firebaseapp.com",
+            databaseURL: "https://ip-y2s2-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "ip-y2s2",
+            storageBucket: "ip-y2s2.firebasestorage.app",
+            messagingSenderId: "191631267863",
+            appId: "1:191631267863:web:ada36be630772321afe452"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        function showError(message) {
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+
+        function clearError() {
+            document.getElementById("error-message").style.display = 'none';
+        }
+
+        document.getElementById("sign-in-btn").addEventListener("click", async () => {
+            clearError();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            
+            if (!email || !password) {
+                showError("Please enter both email and password.");
+                return;
+            }
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                window.location.href = "index.html"; // Redirect on success
+            } catch (error) {
+                showError("Sign in failed. Please try again.");
+            }
+        });
+
+        document.getElementById("signup-btn").addEventListener("click", () => {
+            window.location.href = "signup.html";
+        });
+
+        document.getElementById("reset-password-btn").addEventListener("click", async () => {
+            clearError();
+            const email = document.getElementById("email").value;
+
+            if (!email) {
+                showError("Please enter your email to reset your password.");
+                return;
+            }
+
+            try {
+                await sendPasswordResetEmail(auth, email);
+                alert("Password reset email sent! Check your inbox.");
+            } catch (error) {
+                showError("Error sending reset email. Please try again.");
+            }
+        });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Number Quest - A thrilling VR math game for players of all ages!">
+    <title>Number Quest - Math VR Game</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">Number Quest</div>
+        
+        <!-- Hamburger Menu -->
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="profile.html" class="profile-button">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1>Number Quest</h1>
+        <p>Embark on a thrilling VR adventure where math meets fun!</p>
+        <h3><span class="multiple-text"></span></h3>
+        <a href="#features" class="cta-button">Explore Features</a>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const typed = new Typed('.multiple-text', {
+            strings: ['Number Slams', 'Number Shots', 'Number Slice'],
+            typeSpeed: 60,
+            backSpeed: 60,
+            backDelay: 1000,
+            loop: true,
+        });
+    });
+</script>
+
+
+    <!-- Loading Animation -->
+    <div id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features">
+        <h2>Features</h2>
+        <ul>
+            <li>
+                <i class="fas fa-vr-cardboard"></i>
+                <h3>Immersive VR Experience</h3>
+                <p>Explore stunning virtual worlds while solving math challenges.</p>
+            </li>
+            <li>
+                <i class="fas fa-chart-line"></i>
+                <h3>Adaptive Difficulty</h3>
+                <p>The game adjusts to your skill level, ensuring a fun experience for everyone.</p>
+            </li>
+            <li>
+                <i class="fas fa-users"></i>
+                <h3>Multiplayer Mode</h3>
+                <p>Team up with friends or compete against players worldwide.</p>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+            <img src="path/to/image1.jpg" alt="Game Screenshot 1">
+            <img src="path/to/image2.jpg" alt="Game Screenshot 2">
+            <img src="path/to/image3.jpg" alt="Game Screenshot 3">
+        </div>
+    </section>
+
+<!-- Games Section -->
+<section id="games">
+    <h2>Games in Math World VR</h2>
+    
+    <!-- Number Slams Game -->
+    <div class="game-card">
+        <img src="path/to/game1.jpg" alt="Number Slams">
+        <h3>Number Slams</h3>
+        <p class="tagline">Multiply, Aim, Score!</p>
+        <p>
+            Jump into the action with <strong>Number Slams</strong>! Tackle multiplication questions and slam dunk the right answers into the hoop.
+        </p>
+        <ul class="game-features">
+            <li>🏀 <strong>Immersive VR Gameplay</strong></li>
+            <li>🎓 <strong>Fun & Educational</strong></li>
+            <li>🔢 <strong>Endless Challenges</strong></li>
+            <li>⚡ <strong>Fast-Paced Action</strong></li>
+        </ul>
+        <p class="cta">🏆 Can you master multiplication through basketball?</p>
+    </div>
+
+    <!-- Number Shots Game -->
+    <div class="game-card">
+        <img src="path/to/game2.jpg" alt="Number Shots">
+        <h3>Number Shots</h3>
+        <p class="tagline">Aim, Solve, Fire!</p>
+        <p>
+            Test your shooting and math skills in <strong>Number Shots</strong>! Aim at targets and fire at the correct addition answers.
+        </p>
+        <ul class="game-features">
+            <li>🔫 <strong>Immersive VR Shooting</strong></li>
+            <li>🎯 <strong>Fast-Paced Action</strong></li>
+            <li>💡 <strong>Dynamic Question System</strong></li>
+            <li>🏆 <strong>Challenge Your Math Skills</strong></li>
+        </ul>
+        <p class="cta">🚀 Ready to prove your math sharpshooting skills?</p>
+    </div>
+
+    <!-- Number Slice Game -->
+    <div class="game-card">
+        <img src="path/to/game3.jpg" alt="Number Slice">
+        <h3>Number Slice</h3>
+        <p class="tagline">Cut, Slash, Solve!</p>
+        <p>
+            Sharpen your reflexes in <strong>Number Slice</strong> by slicing even or odd numbers based on the challenge!
+        </p>
+        <ul class="game-features">
+            <li>🔪 <strong>Engaging Slicing Action</strong></li>
+            <li>🎓 <strong>Fun & Educational</strong></li>
+            <li>⚡ <strong>Fast-Paced Gameplay</strong></li>
+            <li>🌀 <strong>Dynamic Challenges</strong></li>
+        </ul>
+        <p class="cta">🏆 Do you have the reflexes to slice your way to victory?</p>
+    </div>
+</section>
+
+
+<!-- Testimonials Section -->
+<section id="testimonials">
+    <h2>What Our Players Are Saying</h2>
+    <div class="testimonials-wrapper">
+        <button class="scroll-btn left" aria-label="Scroll left">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="testimonials-container">
+            <div class="testimonials-track">
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"Number Quest made math my favorite subject! The VR experience is mind-blowing!"</p>
+                    <div class="testimonial-author">
+                        <p class="author-name">Alex</p>
+                        <p class="author-role">Student</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"I love how the game challenges me to think critically while having fun. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <p class="author-name">Sarah</p>
+                        <p class="author-role">Parent</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"A perfect blend of education and entertainment. My kids can't get enough!"</p>
+                    <div class="testimonial-author">
+                        <p class="author-name">John</p>
+                        <p class="author-role">Teacher</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"The best learning game I've ever played! It makes math exciting and interactive!"</p>
+                    <div class="testimonial-author">
+                        <p class="author-name">Emma</p>
+                        <p class="author-role">Student</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"Incredible VR experience! I actually look forward to practicing math now!"</p>
+                    <div class="testimonial-author">
+                        <p class="author-name">Daniel</p>
+                        <p class="author-role">Student</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"I wish we had this game when I was a kid. Learning math has never been this fun!"</p>
+                    <div class="testimonial-author">
+                        <p class="author-name">Michael</p>
+                        <p class="author-role">Parent</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="scroll-btn right" aria-label="Scroll right">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</section>
+
+ 
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Number Quest. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- JavaScript -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav ul li a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        // Add visible class to sections when scrolled into view
+        const sections = document.querySelectorAll('section');
+        const options = {
+            threshold: 0.5,
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Loading animation
+        window.addEventListener('load', () => {
+            const loading = document.getElementById('loading');
+            loading.style.opacity = '0';
+            setTimeout(() => {
+                loading.style.display = 'none';
+            }, 500);
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

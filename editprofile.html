@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Strike Zone VR</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #FFB88C, #FF6F61);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+    
+        .container {
+            background-color: #FFF4E0;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+    
+        h1 {
+            font-size: 2.5em;
+            color: #D35400;
+            margin-bottom: 20px;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    
+        label {
+            font-size: 1.1em;
+            color: #8B4513;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+            margin-left: 5px;
+        }
+    
+        input {
+            width: 90%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #F4A460;
+            border-radius: 8px;
+            font-size: 1em;
+            background-color: #FFF5E1;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        input:focus {
+            border-color: #FF6F61;
+            box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+            outline: none;
+        }
+    
+        button {
+            width: 100%;
+            padding: 12px 20px;
+            background: linear-gradient(90deg, #FF6F61, #D35400);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+    
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+    
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    
+        .error {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+    
+        .success {
+            color: #28a745;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+    
+            h1 {
+                font-size: 2em;
+            }
+    
+            label {
+                font-size: 1em;
+            }
+    
+            input, button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Profile</h1>
+        <label for="username">New Username</label>
+        <input type="text" id="username" placeholder="Enter new username" />
+        <button id="update-btn">Update Username</button>
+        <button id="profile-btn" onclick="window.location.href='profile.html';">Go to Profile</button>
+        <p id="error-message" class="error"></p>
+        <p id="success-message" class="success"></p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth, updateProfile, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyAPqBbtP-KqLLVt0NcuVIKBDDz7jJa6Bak",
+            authDomain: "ip-y2s2.firebaseapp.com",
+            databaseURL: "https://ip-y2s2-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "ip-y2s2",
+            storageBucket: "ip-y2s2.firebasestorage.app",
+            messagingSenderId: "191631267863",
+            appId: "1:191631267863:web:ada36be630772321afe452"
+        };
+    
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getDatabase(app);
+    
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = "signin.html";
+            }
+        });
+    
+        document.getElementById("update-btn").addEventListener("click", async () => {
+            const username = document.getElementById("username").value.trim();
+            const errorMessage = document.getElementById("error-message");
+            const successMessage = document.getElementById("success-message");
+    
+            errorMessage.textContent = '';
+            successMessage.textContent = '';
+    
+            if (!username) {
+                errorMessage.textContent = 'Please enter a valid username.';
+                return;
+            }
+    
+            const user = auth.currentUser;
+            try {
+                await updateProfile(user, { displayName: username });
+                await set(ref(db, `users/${user.uid}/username`), username);
+                localStorage.setItem("username", username);
+                successMessage.textContent = 'Username updated successfully!';
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 2000);
+            } catch (error) {
+                errorMessage.textContent = 'Error updating username: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>

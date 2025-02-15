@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Number Quest</title>
+    <link rel="stylesheet" href="profile.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Firebase SDK -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Number Quest</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
+
+    <!-- Profile Section -->
+    <section id="profile">
+        <div class="profile-container">
+            <!-- User Avatar & Info -->
+            <div class="profile-header">
+                <img src="avatar.png" alt="User Avatar" class="profile-avatar">
+                <h2 id="user-name">Loading...</h2>
+                <p>Math Master | Level 7</p>
+            </div>
+
+            <!-- User Statistics -->
+            <div class="profile-stats">
+                <div class="stat-box">
+                    <i class="fas fa-clock"></i>
+                    <p>Time Played</p>
+                    <h3>12h 30m</h3>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-trophy"></i>
+                    <p>High Score</p>
+                    <h3>9,870</h3>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-star"></i>
+                    <p>Levels Completed</p>
+                    <h3>15</h3>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-section">
+                <h3>XP Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 70%;"></div>
+                </div>
+                <p>70% to Level 8</p>
+            </div>
+
+            <!-- Achievements -->
+            <div class="achievements">
+                <h3>Recent Achievements</h3>
+                <ul>
+                    <li><i class="fas fa-medal"></i> Math Genius - Scored 9,000+</li>
+                    <li><i class="fas fa-gamepad"></i> 10 Levels Completed</li>
+                    <li><i class="fas fa-clock"></i> 10 Hours of Gameplay</li>
+                </ul>
+            </div>
+
+            <!-- Profile Actions -->
+            <div class="profile-actions">
+                <button class="edit-btn">Edit Profile</button>
+                <button class="upload-btn" id="upload-btn">Upload Profile Picture</button>
+                <button class="logout-btn" id="logout-btn">Logout</button>
+            </div>
+        </div>
+    </section>
+
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+    
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAPqBbtP-KqLLVt0NcuVIKBDDz7jJa6Bak",
+            authDomain: "ip-y2s2.firebaseapp.com",
+            databaseURL: "https://ip-y2s2-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "ip-y2s2",
+            storageBucket: "ip-y2s2.firebasestorage.app",
+            messagingSenderId: "191631267863",
+            appId: "1:191631267863:web:ada36be630772321afe452"
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+    
+        // Function to fetch and display user profile data
+        async function fetchUserProfile(user) {
+            let userName = user.displayName || "User";
+            const userAvatar = document.querySelector(".profile-avatar");
+    
+            try {
+                const userRef = ref(db, `users/${user.uid}`);
+                onValue(userRef, (snapshot) => {
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        
+                        // Update username
+                        userName = userData.username || userName;
+                        document.getElementById("user-name").textContent = userName;
+    
+                        // Update profile picture if available
+                        if (userData.image) {
+                            userAvatar.src = userData.image;
+                        }
+                    }
+                });
+    
+                // Store username locally
+                localStorage.setItem("username", userName);
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+                document.getElementById("user-name").textContent = "User";
+            }
+        }
+    
+        // Check authentication state and load user profile
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                await fetchUserProfile(user);
+            } else {
+                window.location.href = "signin.html";
+            }
+        });
+    
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                window.location.href = 'signin.html';
+            } catch (error) {
+                console.error('Error signing out:', error);
+            }
+        });
+    
+        // Edit profile button functionality
+        document.querySelector(".edit-btn").addEventListener("click", () => {
+            window.location.href = "editprofile.html";
+        });
+    
+        // Upload profile picture button functionality
+        document.getElementById("upload-btn").addEventListener("click", () => {
+            window.location.href = "webcam.html";
+        });
+
+        if (userData.image) {
+    userAvatar.src = userData.image;
+}
+
+    window.location.href = "profile.html";
+    
+    </script>
+    
+</body>
+</html>

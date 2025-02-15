@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webcam Capture and Upload</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="profile.css" />
+
+    <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyAPqBbtP-KqLLVt0NcuVIKBDDz7jJa6Bak",
+    authDomain: "ip-y2s2.firebaseapp.com",
+    databaseURL: "https://ip-y2s2-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "ip-y2s2",
+    storageBucket: "ip-y2s2.firebasestorage.app",
+    messagingSenderId: "191631267863",
+    appId: "1:191631267863:web:ada36be630772321afe452"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    // Check if the user is logged in
+    onAuthStateChanged(auth, (user) => {
+    if (!user) {
+        // Redirect to the login page if the user is not logged in
+        alert("You must be logged in to access this page.");
+        window.location.href = "signin.html"; // Replace with your login page
+    } else {
+        // Store the user ID in localStorage
+        localStorage.setItem("userId", user.uid);
+    }
+    });
+    </script>
+    
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background: linear-gradient(135deg, #fff3e6, #ffe8d6);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #2d2d2d;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #ff7f50;
+            margin-bottom: 1rem;
+        }
+
+        /* Square video container */
+        .video-container {
+            width: 320px;  /* Square */
+            height: 320px; /* Square */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 4px solid #ff7f50;
+            box-shadow: 0 5px 15px rgba(255, 127, 80, 0.2);
+            background: black; /* Fallback background */
+        }
+
+        /* Full video inside square */
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures full coverage */
+            transform: scaleX(-1); /* Mirror the video */
+        }
+
+        canvas {
+            width: 320px;
+            height: 320px;
+            border-radius: 12px;
+            border: 2px solid #ddd;
+            margin-top: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        button, .file-label {
+            background: #ff7f50;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover, .file-label:hover {
+            background: #ff6b3d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 127, 80, 0.2);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .video-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            video {
+                width: 100%;
+                height: 100%;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            button, .file-label {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Capture and Upload Photo</h1>
+    
+    <div class="video-container">
+        <video id="webcam" autoplay playsinline></video>
+    </div>
+
+    <div class="button-container">
+        <button id="captureButton">Capture Photo</button>
+        <label for="fileInput" class="file-label">Choose from PC</label>
+        <input type="file" id="fileInput" accept="image/*" />
+        <button id="uploadButton" disabled>Upload to Supabase</button>
+    </div>
+
+    <h2>Preview</h2>
+    <canvas id="canvas" width="320" height="320"></canvas>
+
+    <script type="module" src="webcam.js"></script>
+</body>
+</html>
