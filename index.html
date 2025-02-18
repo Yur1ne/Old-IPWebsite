@@ -4,54 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Number Quest - A thrilling VR math game for players of all ages!">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Yur1ne/IPWebsite/refs/heads/master/assets/logo.jpeg">
+
+    <link rel="icon" href="assets\logo.jpeg" type="image/x-icon">
     <title>Number Quest - Math VR Game</title>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
+
+    <div id="bubble-container"></div>
+    <div id="darkModeToggle" class="toggle-container">
+        <div id="toggle" class="toggle"></div>
+    </div>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburgerMenu" class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">Number Quest</div>
-        
-        <!-- Hamburger Menu -->
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
 
         <!-- Navigation Links -->
         <div class="nav-links">
             <ul>
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#features">Features</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#games">Games</a></li>
                 <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="profile.html" class="profile-button">Profile</a></li>
             </ul>
         </div>
     </nav>
+    
     <!-- Hero Section -->
-    <section id="hero">
-        <h1>Number Quest</h1>
-        <p>Embark on a thrilling VR adventure where math meets fun!</p>
-        <h3><span class="multiple-text"></span></h3>
-        <a href="#features" class="cta-button">Explore Features</a>
+    <section id="hero" class="hero-section">
+        <div class="parallax-background"></div>
+        <div class="hero-content-wrapper"> <div class="hero-logo parallax-element"> <img src="assets/logo-transparent.png" alt="Number Quest Logo">
+            </div>
+            <div class="hero-text parallax-element"> <h1>Number Quest</h1>
+                <p>Embark on a thrilling VR adventure where math meets fun!
+                    <br><br>Number <span id="dynamic-word-hero">Test Text</span>
+                </p>
+                <a href="#features" class="cta-button">Explore Features</a>
+            </div>
+        </div>
     </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const typed = new Typed('.multiple-text', {
-            strings: ['Number Slams', 'Number Shots', 'Number Slice'],
-            typeSpeed: 60,
-            backSpeed: 60,
-            backDelay: 1000,
-            loop: true,
-        });
-    });
-</script>
+    
 
 
     <!-- Loading Animation -->
@@ -81,24 +91,15 @@
         </ul>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery">
-        <h2>Gallery</h2>
-        <div class="gallery-grid">
-            <img src="path/to/image1.jpg" alt="Game Screenshot 1">
-            <img src="path/to/image2.jpg" alt="Game Screenshot 2">
-            <img src="path/to/image3.jpg" alt="Game Screenshot 3">
-        </div>
-    </section>
-
 <!-- Games Section -->
 <section id="games">
     <h2>Games in Math World VR</h2>
     
     <!-- Number Slams Game -->
     <div class="game-card">
-        <img src="path/to/game1.jpg" alt="Number Slams">
+        <img src="assets/game2.jpeg" alt="Number Slams">
         <h3>Number Slams</h3>
+        <p class="tagline">Multiply, Aim, Score!</p>
         <p>
             Jump into the action with <strong>Number Slams</strong>! Tackle multiplication questions and slam dunk the right answers into the hoop.
         </p>
@@ -113,7 +114,7 @@
 
     <!-- Number Shots Game -->
     <div class="game-card">
-        <img src="path/to/game2.jpg" alt="Number Shots">
+        <img src="assets/game1.jpeg" alt="Number Shots">
         <h3>Number Shots</h3>
         <p>
             Test your shooting and math skills in <strong>Number Shots</strong>! Aim at targets and fire at the correct addition answers.
@@ -129,7 +130,7 @@
 
     <!-- Number Slice Game -->
     <div class="game-card">
-        <img src="path/to/game3.jpg" alt="Number Slice">
+        <img src="assets/game3.jpg" alt="Number Slice">
         <h3>Number Slice</h3>
         <p class="tagline">Cut, Slash, Solve!</p>
         <p>
@@ -218,10 +219,10 @@
     </div>
 </section>
 
- 
+
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 Number Quest. All rights reserved.</p>
+        <p>&copy; 2025 Math Magician. All rights reserved.</p>
         <div class="social-links">
             <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
             <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -290,6 +291,6 @@
     </script>
 
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="index.js"></script>
+    <script src="test.js"></script>
 </body>
 </html>
